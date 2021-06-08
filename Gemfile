@@ -56,3 +56,4 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'blorgh', path: 'engines/blorgh'
+gem 'hengine', path: 'engines/hengine'
