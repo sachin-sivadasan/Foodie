@@ -1,0 +1,11 @@
+# This migration comes from hengine (originally 20210608054538)
+class CreateHengineHouses < ActiveRecord::Migration[6.1]
+  def change
+    create_table :hengine_houses do |t|
+      t.string :name
+      t.string :location
+
+      t.timestamps
+    end
+  end
+end
