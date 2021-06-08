@@ -15,6 +15,11 @@
   <%= @article.author.name %>
 </p>
 
+<p>
+  <b>House:</b>
+  <%= @article.house.name if @article.house.present? %>
+</p>
+
 <%= link_to 'Edit', edit_article_path(@article) %> |
 <%= link_to 'Back', articles_path %>
 <h3>Comments</h3>
