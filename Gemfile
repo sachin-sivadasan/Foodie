@@ -60,3 +60,5 @@ gem "hengine", path: "engines/hengine"
 gem "qengine", path: "engines/Qengine"
 gem "graphql"
 gem 'graphiql-rails', group: :development
+
+gem 'tik', path: 'engines/Tik'
