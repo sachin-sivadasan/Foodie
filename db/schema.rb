@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_10_205957) do
+ActiveRecord::Schema.define(version: 2021_06_10_215509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,12 @@ ActiveRecord::Schema.define(version: 2021_06_10_205957) do
     t.index ["author_id"], name: "index_tik_books_on_author_id"
   end
 
+  create_table "tik_employees", force: :cascade do |t|
+    t.text "e_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "tik_patients", force: :cascade do |t|
     t.text "pat_name"
     t.datetime "created_at", precision: 6, null: false
@@ -77,6 +83,21 @@ ActiveRecord::Schema.define(version: 2021_06_10_205957) do
 
   create_table "tik_physicians", force: :cascade do |t|
     t.text "phy_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tik_pictures", force: :cascade do |t|
+    t.text "p_name"
+    t.string "imageable_type", null: false
+    t.bigint "imageable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["imageable_type", "imageable_id"], name: "index_tik_pictures_on_imageable"
+  end
+
+  create_table "tik_products", force: :cascade do |t|
+    t.text "p_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
