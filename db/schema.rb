@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_10_204856) do
+ActiveRecord::Schema.define(version: 2021_06_10_205957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,16 @@ ActiveRecord::Schema.define(version: 2021_06_10_204856) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "tik_appointments", force: :cascade do |t|
+    t.text "app_name"
+    t.bigint "patient_id", null: false
+    t.bigint "physician_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["patient_id"], name: "index_tik_appointments_on_patient_id"
+    t.index ["physician_id"], name: "index_tik_appointments_on_physician_id"
+  end
+
   create_table "tik_authors", force: :cascade do |t|
     t.text "name"
     t.datetime "created_at", precision: 6, null: false
@@ -57,6 +67,18 @@ ActiveRecord::Schema.define(version: 2021_06_10_204856) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["author_id"], name: "index_tik_books_on_author_id"
+  end
+
+  create_table "tik_patients", force: :cascade do |t|
+    t.text "pat_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tik_physicians", force: :cascade do |t|
+    t.text "phy_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "tik_tickets", force: :cascade do |t|
