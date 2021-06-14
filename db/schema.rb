@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_10_215509) do
+ActiveRecord::Schema.define(version: 2021_06_14_053208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,8 +69,27 @@ ActiveRecord::Schema.define(version: 2021_06_10_215509) do
     t.index ["author_id"], name: "index_tik_books_on_author_id"
   end
 
+  create_table "tik_children", force: :cascade do |t|
+    t.text "c_name"
+    t.bigint "parent_id"
+    t.bigint "school_id"
+    t.string "entity_type"
+    t.bigint "entity_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["entity_type", "entity_id"], name: "index_tik_children_on_entity"
+    t.index ["parent_id"], name: "index_tik_children_on_parent_id"
+    t.index ["school_id"], name: "index_tik_children_on_school_id"
+  end
+
   create_table "tik_employees", force: :cascade do |t|
     t.text "e_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tik_parents", force: :cascade do |t|
+    t.text "p_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -108,10 +127,17 @@ ActiveRecord::Schema.define(version: 2021_06_10_215509) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "tik_users", force: :cascade do |t|
+    t.text "u_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "tik_children", "tik_children", column: "school_id"
 end
