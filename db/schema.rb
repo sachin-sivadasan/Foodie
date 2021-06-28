@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_14_053208) do
+ActiveRecord::Schema.define(version: 2021_06_14_094338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -121,10 +121,30 @@ ActiveRecord::Schema.define(version: 2021_06_14_053208) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "tik_tickets", force: :cascade do |t|
-    t.string "name"
+  create_table "tik_ticket_mappings", force: :cascade do |t|
+    t.text "association_type", null: false
+    t.boolean "active", default: true, null: false
+    t.bigint "ticket_id", null: false
+    t.string "entity_type", null: false
+    t.bigint "entity_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["active"], name: "index_tik_ticket_mappings_on_active"
+    t.index ["association_type"], name: "index_tik_ticket_mappings_on_association_type"
+    t.index ["entity_type", "entity_id"], name: "index_tik_ticket_mappings_on_entity"
+    t.index ["ticket_id"], name: "index_tik_ticket_mappings_on_ticket_id"
+  end
+
+  create_table "tik_tickets", force: :cascade do |t|
+    t.text "ticket_no", null: false
+    t.text "ticket_type", null: false
+    t.text "description"
+    t.string "status", default: "New"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["status"], name: "index_tik_tickets_on_status"
+    t.index ["ticket_no"], name: "index_tik_tickets_on_ticket_no"
+    t.index ["ticket_type"], name: "index_tik_tickets_on_ticket_type"
   end
 
   create_table "tik_users", force: :cascade do |t|
